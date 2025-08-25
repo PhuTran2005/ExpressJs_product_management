@@ -1,0 +1,47 @@
+extends ../../layouts/default.pug
+include ../../mixins/alerts.pug
+block main
+  +success-alert(3000)
+  +warning-alert(3000)
+  +error-alert(3000)
+  .form-container
+    h1 Thêm sản phẩm mới
+
+    form(method="POST" action=`${prefixAdmin}/products/create-product` enctype="multipart/form-data" id="form-create-product")
+      .form-group
+        label(for="title") Tên sản phẩm
+        input#title(type="text" name="title" required placeholder="Nhập tên sản phẩm")
+
+      .form-group
+        label(for="price") Giá
+        input#price(type="number" name="price" required min="0" placeholder="0")
+
+      .form-group
+        label(for="stock") Số lượng tồn
+        input#stock(type="number" name="stock" required min="0")
+
+      .form-group
+        label(for="position") Vị trí
+        input#position(type="number" name="position" min="1")
+
+      .form-group
+        label(for="status") Trạng thái
+        select#status(name="status")
+          option(value="active") Active
+          option(value="inactive") Inactive
+
+      .form-group
+        label(for="discountPercentage") Giảm giá (%)
+        input#discountPercentage(type="number" name="discountPercentage" min="0" max="100")
+
+      .form-group(upload-image)
+        label(for="thumbnail") Ảnh thumbnail
+        input#thumbnail(type="file" name="thumbnail" accept = "image/*" upload-image-input)
+        img(class="image-preview" src="" alt="preview" width="200" upload-image-preview)
+
+      .form-group
+        label(for="description") Mô tả sản phẩm
+        textarea#description(name="description" rows="4" placeholder="Nhập mô tả sản phẩm...")
+
+
+      button.btn-submit(type="submit") Thêm sản phẩm

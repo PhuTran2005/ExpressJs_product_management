@@ -1,0 +1,78 @@
+extend ../../layouts/default.pug
+block main 
+        .dashboard-content
+          // Stats Grid
+          .stats-grid
+            .stat-card
+              .stat-icon.blue
+                i.fas.fa-users
+              .stat-number 1,234
+              .stat-label Tổng người dùng
+              .stat-change.positive
+                i.fas.fa-arrow-up
+                | +12% từ tháng trước
+
+            .stat-card
+              .stat-icon.green
+                i.fas.fa-shopping-cart
+              .stat-number 2,456
+              .stat-label Đơn hàng
+              .stat-change.positive
+                i.fas.fa-arrow-up
+                | +8% từ tháng trước
+
+            .stat-card
+              .stat-icon.orange
+                i.fas.fa-dollar-sign
+              .stat-number 128,540
+              .stat-label Doanh thu (VNĐ)
+              .stat-change.positive
+                i.fas.fa-arrow-up
+                | +15% từ tháng trước
+
+            .stat-card
+              .stat-icon.red
+                i.fas.fa-eye
+              .stat-number 45,678
+              .stat-label Lượt xem
+              .stat-change.negative
+                i.fas.fa-arrow-down
+                | -3% từ tháng trước
+
+          // Charts Section
+          .chart-section
+            .chart-card
+              .chart-title Biểu đồ doanh thu
+              .chart-placeholder
+                i.fas.fa-chart-line(style="font-size: 3rem; margin-right: 1rem;")
+                | Biểu đồ sẽ được hiển thị ở đây
+
+            .chart-card
+              .chart-title Hoạt động gần đây
+              .activity-item
+                .activity-icon.blue
+                  i.fas.fa-user-plus
+                .activity-content
+                  .activity-title Người dùng mới đăng ký
+                  .activity-time 5 phút trước
+
+              .activity-item
+                .activity-icon.green
+                  i.fas.fa-shopping-bag
+                .activity-content
+                  .activity-title Đơn hàng mới
+                  .activity-time 15 phút trước
+
+              .activity-item
+                .activity-icon.orange
+                  i.fas.fa-star
+                .activity-content
+                  .activity-title Đánh giá mới
+                  .activity-time 30 phút trước
+
+              .activity-item
+                .activity-icon.red
+                  i.fas.fa-exclamation-triangle
+                .activity-content
+                  .activity-title Cảnh báo hệ thống
+                  .activity-time 1 giờ trước

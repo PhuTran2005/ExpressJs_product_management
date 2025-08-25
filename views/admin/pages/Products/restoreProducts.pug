@@ -1,0 +1,88 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-header.pug
+include ../../mixins/filterStatus.pug
+include ../../mixins/pagination.pug
+include ../../mixins/change-mutil-status.pug
+include ../../mixins/alerts.pug
+
+block main
+    +success-alert(3000)
+    +warning-alert(3000)
+    +error-alert(3000)
+    .container-plus1
+        +box-header('Sản phẩm đã xóa')
+        +filter-status(fillterStatus)
+        .form-header
+            h3 Thay đổi nhiều #{name}
+            form(
+                action=`${prefixAdmin}/products/change-multil?_method=PATCH`,
+                method="POST",
+                class="change-multil-form"
+                )
+                .form-wrapper
+                    .form-group
+                        select(name="type" id="type")
+                            option(disabled selected value="") -- Chọn thao tác --
+                            option(value="restore") Khôi phục
+
+                    .form-group.hidden
+                        label(for="ids") ID sản phẩm
+                        input(
+                            type="text",
+                            name="ids",
+                            id="ids",
+                            value=""
+                        )
+                    button(type="submit" class="submit-btn disabled" id="change-mutil-btn") Áp dụng
+        
+
+    .container-plus1
+        .products-table(
+            change-multi-products)
+            .table-header
+                .header-cell.stt
+                    input(type="checkbox" name="select-all" id="select-all")
+                .header-cell.stt STT
+                .header-cell.image Hình ảnh
+                .header-cell.title Tiêu đề
+                .header-cell.position Vị trí
+                .header-cell.price Giá
+                .header-cell.status Trạng thái
+                .header-cell.actions Hành động
+
+            .table-body
+                each product, index in data
+                    .table-row
+                        .table-cell.product-checkbox
+                            input.select-product(
+                                type="checkbox",
+                                name="ids",
+                                value=product._id
+                            )
+                        .table-cell.stt #{index + 1}
+                            
+                            
+                        .table-cell.image
+                            .image-container
+                                img(src=product.thumbnail, alt=product.title)
+                        .table-cell.title= product.title
+                        .table-cell.position 
+                            span #{product.position}
+                        .table-cell.price
+                            if product.salePrice && product.salePrice < product.price
+                                .price-sale #{product.salePrice}$
+                                .price-original #{product.price}$
+                            else
+                                .price-current #{product.price}$
+                        .table-cell.status
+                            if product.status === 'inactive'
+                                button.status-badge.inactive#status-btn(data-status=product.status data-id=product._id) Dừng hoạt động  
+                            else
+                                button.status-badge.active#status-btn(data-status=product.status data-id=product._id) Hoạt động
+                        .table-cell.actions
+                            .action-buttons
+                                button.btn-restore(data-restore-product = product._id) Khôi phục
+
+    +pagination(pagination,queryString)
+    form(action, method="POST", id="restore-product-form" data-path=`${prefixAdmin}/products/restore/`)
+     

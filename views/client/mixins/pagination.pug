@@ -1,0 +1,30 @@
+mixin pagination(pagination, queryString)
+  if pagination.totalPages > 1
+    .pagination
+      ul.pagination-list
+        - const qs = queryString ? `${queryString}&` : ''
+        
+        // First Page
+        li.page-item(class=pagination.currentPage === 1 ? 'disabled' : '')
+          a.page-link(href=`?${qs}page=1`) «
+
+        // Previous Page
+        li.page-item(class=pagination.currentPage === 1 ? 'disabled' : '')
+          a.page-link(href=`?${qs}page=${pagination.currentPage - 1}`) ‹
+
+        // Page Numbers
+        each page in pagination.pages
+          if page === "..."
+            li.page-item.disabled
+              span.page-link ...
+          else
+            li.page-item(class=page === pagination.currentPage ? 'active' : '')
+              a.page-link(href=`?${qs}page=${page}`) #{page}
+
+        // Next Page
+        li.page-item(class=pagination.currentPage === pagination.totalPages ? 'disabled' : '')
+          a.page-link(href=`?${qs}page=${pagination.currentPage + 1}`) ›
+
+        // Last Page
+        li.page-item(class=pagination.currentPage === pagination.totalPages ? 'disabled' : '')
+          a.page-link(href=`?${qs}page=${pagination.totalPages}`) »

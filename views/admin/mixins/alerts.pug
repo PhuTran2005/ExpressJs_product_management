@@ -1,0 +1,23 @@
+mixin success-alert(time)
+    if success_msg.length
+        each msg in success_msg
+            .alert.alert-success(data-autoclose=time)
+                span.message= msg
+                button.close(type="button")
+                    i.fa-solid.fa-xmark
+
+mixin error-alert(time)
+    if error_msg.length
+        each msg in error_msg
+            .alert.alert-danger(data-autoclose="5000")
+                span.message= msg
+                button.close(type="button")
+                    i.fa-solid.fa-xmark
+
+mixin warning-alert(time)   
+    if warning_msg.length
+        each msg in warning_msg
+            .alert.alert-warning(data-autoclose="5000")
+                span.message= msg
+                button.close(type="button")
+                    i.fa-solid.fa-xmark                 

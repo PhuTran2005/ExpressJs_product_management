@@ -1,0 +1,86 @@
+// Sidebar
+aside.sidebar#sidebar
+  .logo
+    i.fas.fa-crown
+    h2 Admin
+  nav
+    ul.nav-menu
+      li.nav-item
+        a.nav-link(class=(currentUrl.startsWith(`${prefixAdmin}/dashboard`) ? 'active' : ''), href=`${prefixAdmin}/dashboard`)
+          i.fas.fa-tachometer-alt
+          span.nav-text Dashboard
+      
+      li.nav-item.has-submenu
+        a.nav-link.menu-toggle(class=(currentUrl.startsWith(`${prefixAdmin}/users`) ? 'active' : ''))
+          i.fas.fa-users
+          span.nav-text Người dùng
+          i.fas.fa-chevron-down.submenu-arrow
+        ul.submenu
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/users` ? 'active' : ''), href=`${prefixAdmin}/users`)
+              span Danh sách người dùng
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/users/roles` ? 'active' : ''), href=`${prefixAdmin}/users/roles`)
+              span Phân quyền
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/users/profile` ? 'active' : ''), href=`${prefixAdmin}/users/profile`)
+              span Hồ sơ người dùng
+      
+      li.nav-item.has-submenu
+        a.nav-link.menu-toggle(class=(currentUrl.startsWith(`${prefixAdmin}/products`) ? 'active' : ''))
+          i.fas.fa-box
+          span.nav-text Sản phẩm
+          i.fas.fa-chevron-down.submenu-arrow
+        ul.submenu
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/products` ? 'active' : ''), href=`${prefixAdmin}/products`)
+              span Danh sách sản phẩm
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/products/restore` ? 'active' : ''), href=`${prefixAdmin}/products/restore`)
+              span Khôi phục sản phẩm
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/products/inventory` ? 'active' : ''), href=`${prefixAdmin}/products/inventory`)
+              span Kho hàng
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/products/reviews` ? 'active' : ''), href=`${prefixAdmin}/products/reviews`)
+              span Đánh giá sản phẩm
+      
+      li.nav-item.has-submenu
+        a.nav-link.menu-toggle(class=(currentUrl.startsWith(`${prefixAdmin}/orders`) ? 'active' : ''))
+          i.fas.fa-shopping-cart
+          span.nav-text Đơn hàng
+          i.fas.fa-chevron-down.submenu-arrow
+        ul.submenu
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/orders` ? 'active' : ''), href=`${prefixAdmin}/orders`)
+              span Tất cả đơn hàng
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/orders/pending` ? 'active' : ''), href=`${prefixAdmin}/orders/pending`)
+              span Đơn hàng chờ xử lý
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/orders/completed` ? 'active' : ''), href=`${prefixAdmin}/orders/completed`)
+              span Đơn hàng hoàn thành
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/orders/cancelled` ? 'active' : ''), href=`${prefixAdmin}/orders/cancelled`)
+              span Đơn hàng hủy
+      
+      li.nav-item.has-submenu
+        a.nav-link.menu-toggle(class=(currentUrl.startsWith(`${prefixAdmin}/statistics`) ? 'active' : ''))
+          i.fas.fa-chart-bar
+          span.nav-text Thống kê
+          i.fas.fa-chevron-down.submenu-arrow
+        ul.submenu
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/statistics/sales` ? 'active' : ''), href=`${prefixAdmin}/statistics/sales`)
+              span Báo cáo bán hàng
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/statistics/revenue` ? 'active' : ''), href=`${prefixAdmin}/statistics/revenue`)
+              span Doanh thu
+          li.submenu-item
+            a.submenu-link(class=(currentUrl === `${prefixAdmin}/statistics/customers` ? 'active' : ''), href=`${prefixAdmin}/statistics/customers`)
+              span Thống kê khách hàng
+      
+      li.nav-item
+        a.nav-link(class=(currentUrl.startsWith(`${prefixAdmin}/settings`) ? 'active' : ''), href=`${prefixAdmin}/settings`)
+          i.fas.fa-cog
+          span.nav-text Cài đặt

@@ -1,0 +1,27 @@
+mixin change-mutil-status(path,name)
+    .form-header
+        form(
+                action=`${prefixAdmin}/products/change-multil?_method=PATCH`,
+                method="POST",
+                class="change-multil-form"
+                )
+                .form-wrapper
+                    h3 Thay đổi nhiều #{name}   
+                    .form-group
+                        select(name="type" id="type")
+                            option(disabled selected value="") -- Chọn thao tác --
+                            option(value="active") Hoạt động
+                            option(value="inactive") Dừng hoạt động
+                            option(value="delete") Xóa
+                            option(value="change-position") Thay Đổi vị trí
+
+                    .form-group.hidden
+                        label(for="ids") ID sản phẩm
+                        input(
+                            type="text",
+                            name="ids",
+                            id="ids",
+                            value=""
+                        )
+                    button(type="submit" class="submit-btn disabled" id="change-mutil-btn") Áp dụng
+        

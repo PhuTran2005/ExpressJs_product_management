@@ -1,0 +1,36 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-header.pug
+include ../../mixins/pagination.pug
+include ../../mixins/searchForm.pug
+include ../../mixins/alerts.pug
+block main
+    +success-alert(3000)
+    +warning-alert(3000)
+    +error-alert(3000)
+    +box-header('Danh sách sản phẩm')
+    .section-filter
+        .search-form
+            +search-form(searchKeyword)  
+    .container
+        .products-grid
+            each product in data
+                .product-card
+                    .product-image
+                        img(src=product.thumbnail, alt=product.title)
+                        if product.discountPercentage > 0
+                            .discount-badge
+                                span -#{product.discountPercentage}%
+                    .product-info
+                        h3.product-title= product.title
+                        .product-pricing
+                            if product.salePrice && product.salePrice < product.price
+                                .price-container
+                                    .sale-price $#{product.salePrice}
+                                    .original-price $#{product.price}
+                            else
+                                .price-container
+                                    .current-price $#{product.price}
+                        .product-actions
+                            a.btn-view(href=`/products/${product.slug}`) Xem chi tiết
+                            button.btn-cart(type="button") Thêm vào giỏ
+        +pagination(pagination,queryString)

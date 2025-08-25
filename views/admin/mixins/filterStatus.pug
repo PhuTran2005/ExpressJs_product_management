@@ -1,0 +1,11 @@
+include ../mixins/searchForm.pug
+
+mixin filter-status(fillterStatus)
+  
+  h3 Bộ lọc và tìm kiếm
+  .section-filter
+    .filter-buttons
+      each status, index in fillterStatus.array
+        button(type="button" name= `atatus-${index+1}` value=status.value class=`filter-btn ${fillterStatus.selectedStatus == status.value?'active':'inactive'}`) #{status.label}
+    .search-form
+      +search-form(searchKeyword)  

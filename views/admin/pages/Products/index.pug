@@ -1,0 +1,81 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-header.pug
+include ../../mixins/filterStatus.pug
+include ../../mixins/pagination.pug
+include ../../mixins/change-mutil-status.pug
+include ../../mixins/alerts.pug
+
+block main
+    +success-alert(3000)
+    +warning-alert(3000)
+    +error-alert(3000)
+    
+    .container-plus1
+        +box-header('Danh sách sản phẩm')
+        +filter-status(fillterStatus)
+        +change-mutil-status(`${prefixAdmin}/products/change-multil?_method=PATCH`,"Sản phẩm")
+        .form-wrapper            
+            button(type="button" class="add-product-btn")
+                a(href=`${prefixAdmin}/products/create-product`) + Thêm sản phẩm
+        
+
+    .container-plus1
+        .products-table(
+            change-multi-products)
+            .table-header
+                .header-cell.stt
+                    input(type="checkbox" name="select-all" id="select-all")
+                .header-cell.stt STT
+                .header-cell.image Hình ảnh
+                .header-cell.title Tiêu đề
+                .header-cell.position Vị trí
+                .header-cell.price Giá
+                .header-cell.status Trạng thái
+                .header-cell.actions Hành động
+
+            .table-body
+                each product, index in data
+                    .table-row
+                        .table-cell.product-checkbox
+                            input.select-product(
+                                type="checkbox",
+                                name="ids",
+                                value=product._id
+                            )
+                        .table-cell.stt #{index + 1}
+                            
+                            
+                        .table-cell.image
+                            .image-container
+                                img(src=product.thumbnail, alt=product.title)
+                        .table-cell.title= product.title
+
+                        .table-cell.position 
+                            input(
+                                type="number"
+                                value = product.position
+                                min = "1"
+                                name = "product-position"
+                                )
+                        .table-cell.price
+                            if product.salePrice && product.salePrice < product.price
+                                .price-sale #{product.salePrice}$
+                                .price-original #{product.price}$
+                            else
+                                .price-current #{product.price}$
+                        .table-cell.status
+                            if product.status === 'inactive'
+                                button.status-badge.inactive#status-btn(data-status=product.status data-id=product._id) Dừng hoạt động  
+                            else
+                                button.status-badge.active#status-btn(data-status=product.status data-id=product._id) Hoạt động
+                        .table-cell.actions
+                            .action-buttons
+                                a.btn-edit(href=`${prefixAdmin}/products/edit-product/${product._id}` ) Sửa
+                                button.btn-delete(data-delete-product = product._id) Xóa
+                                a.btn-detail(href=`${prefixAdmin}/products/detail/${product._id}` ) Chi tiết
+
+    +pagination(pagination,queryString)
+    form(action, method="POST", id="change-status-form" data-path=`${prefixAdmin}/products/change-status/`)
+    form(action, method="POST", id="delete-products-form" data-path=`${prefixAdmin}/products/delete/`)
+  
+     

@@ -1,0 +1,27 @@
+extends ../../layouts/default.pug
+include ../../mixins/alerts.pug
+block main
+    +success-alert(3000)
+    +warning-alert(3000)
+    +error-alert(3000)
+    .product-detail
+      .gallery
+        img.main-image(src=product.thumbnail alt=product.title)
+        if product.images
+          .thumbnail-list
+            each imgUrl in product.images
+              img.thumb(src=imgUrl alt=product.title)
+
+      .info
+        h1.title= product.title
+        p.description= product.description
+        p.price Giá: #{product.price} ₫
+        if product.discountPercentage
+          p.discount Giảm giá: #{product.discountPercentage}%
+        p.stock Tồn kho: #{product.stock}
+        p.status Trạng thái: #{product.status == 'active' ? '✅ Còn hàng' : '❌ Hết hàng'}
+
+        .actions
+          form(action="/cart/add/" + product._id method="POST")
+            button.btn-primary(type="submit") 🛒 Thêm vào giỏ
+          a.btn-secondary(href="/checkout") Mua ngay

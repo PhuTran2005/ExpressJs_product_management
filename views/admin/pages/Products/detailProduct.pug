@@ -1,0 +1,19 @@
+extends ../../layouts/default.pug
+include ../../mixins/alerts.pug
+
+block main
+    +success-alert(3000)
+    +warning-alert(3000)
+    +error-alert(3000)
+    .product-detail
+        .product-image
+            img(src=product.thumbnail alt=product.title)
+        .product-info
+            h2.product-title= product.title
+            p.product-description= product.description
+            p.product-price Giá: #{product.price}₫
+            if product.discountPercentage
+                p.product-discount Giảm giá: #{product.discountPercentage}%
+            p.product-stock Tồn kho: #{product.stock}
+            p.product-status Trạng thái: #{product.status == 'active' ? 'Còn hàng' : 'Hết hàng'}
+
