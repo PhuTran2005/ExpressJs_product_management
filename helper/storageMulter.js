@@ -1,14 +1,22 @@
+// helper/storageMulter.js
 const multer = require("multer");
-module.exports = () => {
-  const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "./public/uploads/");
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now();
-      cb(null, `${uniqueSuffix}-${file.originalname}`);
-    },
-  });
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
 
-  return storage;
-};
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "products", // folder lưu trên cloudinary
+    allowed_formats: ["jpg", "png", "jpeg", "gif"],
+  },
+});
+
+const upload = multer({ storage });
+
+module.exports = upload;

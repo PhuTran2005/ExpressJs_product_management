@@ -228,6 +228,7 @@ module.exports.createProduct = async (req, res) => {
 
 // [POST] /admin/products/add-product
 module.exports.createProductPost = async (req, res) => {
+  console.log("oce");
   console.log(req.file);
   // Render the admin products page with the fetched data
   try {
@@ -243,7 +244,7 @@ module.exports.createProductPost = async (req, res) => {
     }
 
     if (req.file) {
-      req.body.thumbnail = `/uploads/${req.file.filename}`;
+      req.body.thumbnail = req.file.path;
     }
 
     const newProduct = new products(req.body);
@@ -284,7 +285,7 @@ module.exports.editProductPost = async (req, res) => {
     }
 
     if (req.file) {
-      req.body.thumbnail = `/uploads/${req.file.filename}`;
+      req.body[req.file.fieldname] = req.file.path;
     }
     await products.updateOne({ _id: id }, req.body);
     req.flash("success_msg", "✅ Cập nhật sản phẩm thành công!");

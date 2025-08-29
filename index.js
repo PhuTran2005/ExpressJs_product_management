@@ -4,6 +4,7 @@ const bodyParser = require("body-parser"); // For parsing request bodies
 const session = require("express-session");
 const flash = require("connect-flash");
 const app = express();
+
 //Flash
 app.use(
   session({
